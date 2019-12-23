@@ -2,12 +2,13 @@ import React from 'react';
 import * as Redux from 'redux'
 import {RootState} from '../../rootReducer';
 import {connect} from 'react-redux'
-import {increment, decrement} from './reducer' 
+import {increment, decrement, autoIncrement} from './reducer' 
 
 type MyProps = { 
   count: number,
   increment: () => void,
   decrement: () => void,
+  autoIncrement: () => void,
 };
 
 type MyState = {
@@ -15,13 +16,14 @@ type MyState = {
 
 class ComposerContainer extends React.Component<MyProps, MyState> {
   render() {
-    const {count, increment, decrement} = this.props;
+    const {count, increment, decrement, autoIncrement} = this.props;
     return (
       <div>
         <div>
           <button onClick={increment}/>
             {count}
           <button onClick={decrement}/>
+          <button onClick={autoIncrement}>AUTO</button>
         </div>
         <ul className="set">
           <li className="white b"></li>
@@ -49,6 +51,7 @@ const mapState = (state: RootState) => ({
 const mapDispatch = {
   increment,
   decrement,
+  autoIncrement
 };
 
 export const Composer = connect(
